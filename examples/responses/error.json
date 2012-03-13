@@ -1,0 +1,2 @@
+<?php header('HTTP/1.1 406 Not Acceptable'); header('Content-Type: application/json'); ?>
+{"message":"You blew it!"}

@@ -1,0 +1,2 @@
+<?php header('Content-Type: application/json'); ?>
+{"url":"http://www.google.com"}

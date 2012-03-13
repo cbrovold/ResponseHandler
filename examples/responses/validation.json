@@ -1,0 +1,2 @@
+<?php header('HTTP/1.1 406 Not Acceptable'); header('Content-Type: application/json'); ?>
+{"validation":{"name":["Please enter a name"],"options":["You can't select that one."]}}

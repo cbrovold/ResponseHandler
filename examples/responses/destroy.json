@@ -1,0 +1,2 @@
+<?php header('Content-Type: application/json'); ?>
+{"destroy":1,"message":"You're element has now been removed from the DOM."}

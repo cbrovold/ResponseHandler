@@ -1,0 +1,15 @@
+input.error, select.error {
+	background-color:red;
+}
+
+form>label {
+	width:250px;
+	clear:both;
+	display:block;
+	margin-bottom:10px;
+}
+
+form>label>input[type="text"], form>label>select{
+	float:right;
+	width:120px;
+}

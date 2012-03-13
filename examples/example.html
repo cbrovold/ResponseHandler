@@ -1,0 +1,72 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>Toaster Example</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="jquery_ujs.js"></script>
+<script src="../src/responsehandler.js"></script>
+<script src="toaster.min.js"></script>
+<script>
+$(document).ready(function () {
+
+	var submitBtn = null, itms = $('[data-remote="true"]').bind('ajax:success', function (evt, data) {
+		 ResponseHandler.success(data);
+	}).bind('ajax:error', function (evt, resp) {
+		 ResponseHandler.error($.parseJSON(resp.responseText));
+	}).bind('ajax:before', function (evt, data) {
+		 submitBtn = (submitBtn===null) ? $(this).find('button[type="submit"]') : submitBtn;
+		 submitBtn.attr('disabled', 'disabled');
+	}).bind('ajax:complete', function (evt, data) {
+		 submitBtn.removeAttr('disabled');
+	});
+
+	if (itms.length>0) {
+	  ResponseHandler.current = new ResponseHandlerFactory({
+			handlers:{
+				url:RedirectResponseHandler,
+				data:DataResponseHandler,
+				destroy:DestroyResponseHandler,
+				validation:ValidationResponseHandler
+			}
+	  });
+	}
+});
+</script>
+<link rel="stylesheet" type="text/css" href="toaster.css" />
+<link rel="stylesheet" type="text/css" href="example.css" />
+</head>
+<body>
+<div id="toaster"></div>
+
+<h2>Success Example</h2>
+<a href="responses/success.json" data-remote="true">See Success</a>
+
+<h2>Error Example</h2>
+<a href="responses/error.json" data-remote="true">See Error</a>
+
+<h2>Delete/Destroy Example</h2>
+<a href="responses/destroy.json" data-remote="true" data-id="1">See Delete</a>
+
+<h2>Validation Example</h2>
+<form method="post" action="responses/validation.json" data-remote="true">
+	<label>Name
+		<input type="text" name="name" />
+	</label>
+	<label>Title
+		<input type="text" name="title" />
+	</label>
+	<label>Options
+		<select name="options">
+			<option value="1">Option 1</option>
+			<option value="2">Option 2</option>
+			<option value="3">Option 3</option>
+		</select>
+	</label>
+	<br />
+	<button type="submit" autocomplete="off">Submit</button>
+</form>
+
+<h2>Redirect Example</h2>
+<a href="responses/url.json" data-remote="true">See Redirect</a>
+</body>
+</html>
