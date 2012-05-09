@@ -1,1 +1,12 @@
+This jQuery plugin is a response handler and takes a data type and binds it to the response.
+
+Use the css to control the look of the toaster. Check out the examples for usage.
+
 In order to use the examples you will have to use PHP because I needed to pass headers with the HTTP response.
+- TODO:
+	* Create an example for the Data Grid response handler 
+
+I'm using Google's Closure compiler to do the javascript minification/compiling and am including the shell script that I use. It does require that you include the compiler.jar
+file or change the path to include it.
+
+I haven't decided on any licensing as of yet, so just use it if you find it.

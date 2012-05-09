@@ -7,32 +7,27 @@
 <script src="../src/responsehandler.js"></script>
 <script src="toaster.min.js"></script>
 <script>
-$(document).ready(function () {
-
-	var submitBtn = null, itms = $('[data-remote="true"]').bind('ajax:success', function (evt, data) {
-		 ResponseHandler.success(data);
-	}).bind('ajax:error', function (evt, resp) {
-		 ResponseHandler.error($.parseJSON(resp.responseText));
-	}).bind('ajax:before', function (evt, data) {
-		 submitBtn = (submitBtn===null) ? $(this).find('button[type="submit"]') : submitBtn;
-		 submitBtn.attr('disabled', 'disabled');
-	}).bind('ajax:complete', function (evt, data) {
-		 submitBtn.removeAttr('disabled');
+	$(document).ready(function () {
+	
+		var submitBtn = null, itms = $('[data-remote="true"]').bind('ajax:success', function (evt, data) {
+			 $.responseHandler.success(data);
+		}).bind('ajax:error', function (evt, resp) {
+			 $.responseHandler.error($.parseJSON(resp.responseText));
+		}).bind('ajax:before', function (evt, data) {
+			 submitBtn = (submitBtn===null) ? $(this).find('button[type="submit"]') : submitBtn;
+			 submitBtn.attr('disabled', 'disabled');
+		}).bind('ajax:complete', function (evt, data) {
+			 submitBtn.removeAttr('disabled');
+		});
+	
+		if (itms.length>0) {
+		  $.responseHandler.current = new $(document).responseHandlerFactory({
+				handlers:$.responseHandler.map
+		  });
+		}
+	
 	});
-
-	if (itms.length>0) {
-	  ResponseHandler.current = new ResponseHandlerFactory({
-			handlers:{
-				url:RedirectResponseHandler,
-				data:DataResponseHandler,
-				destroy:DestroyResponseHandler,
-				validation:ValidationResponseHandler
-			}
-	  });
-	}
-});
 </script>
-<link rel="stylesheet" type="text/css" href="toaster.css" />
 <link rel="stylesheet" type="text/css" href="example.css" />
 </head>
 <body>
@@ -50,13 +45,13 @@ $(document).ready(function () {
 <h2>Validation Example</h2>
 <form method="post" action="responses/validation.json" data-remote="true">
 	<label>Name
-		<input type="text" name="name" />
+		<input type="text" name="name" id="name" />
 	</label>
 	<label>Title
-		<input type="text" name="title" />
+		<input type="text" name="title" id="title" />
 	</label>
 	<label>Options
-		<select name="options">
+		<select name="options" id="options">
 			<option value="1">Option 1</option>
 			<option value="2">Option 2</option>
 			<option value="3">Option 3</option>

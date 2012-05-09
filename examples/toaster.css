@@ -22,3 +22,8 @@ div#toaster.error{
 div#toaster.success{
 	background-color:green;
 }
+div#toaster.warn{
+	background-color:#FFEF14;
+	text-shadow: #fff 1px 1px 0;
+	color:#000;
+}
